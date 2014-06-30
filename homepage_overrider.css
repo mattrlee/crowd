@@ -1,0 +1,138 @@
+#crowd_container {
+ border: 1px solid #eee;
+ width: 1050px;
+ margin: 0 auto;
+ }
+#crowd_container .loading{
+ margin:10px auto;
+ width:10px;
+}
+.crowd_av_categories, .crowd_av_courses {
+ background-color: #eee;
+ text-align: left;
+ line-height: 20px;
+ color: #777;
+ font:bold 15px arial, sans-serif;
+ padding: 5px;
+}
+.crowd_av_categories_content, .crowd_av_courses_content {
+ min-height: 50px;
+ padding: 20px;
+}
+.crowd_category_box {
+ float: left;
+ width:200px;
+ margin:25px;
+ text-align: center;
+ cursor: pointer;
+}
+.crowd_category_box span {
+ color: #6699ff;
+ font:bold 15px arial, sans-serif;
+ line-height: 20px;
+}
+.crowd_empty_box {
+ height: 10px;
+ width: 199px
+}
+.crowd_category_image_box {
+ border:1px solid #eee;
+-moz-border-radius: 10px;
+ border-radius: 10px; 
+ height:199px;
+ width:199px;
+ margin:0;
+ background-color: white;
+ display: table-cell; 
+ vertical-align: middle;
+}
+
+.crowd_category_image_box img {
+ display: block;
+ max-width: 90%;
+ min-width: 90%;
+ max-height: 90%;
+ min-height: 90%;
+ margin: auto auto auto auto;
+}
+.crowd_clear {
+ clear: both;
+}
+.crowd_sub_level0 {
+ background-color: #eee;
+}
+.crowd_hidden_box {
+ display:none;	
+}
+.crowd_arrow_up0 {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-bottom: 20px solid #eee;
+	position: absolute;
+	display: none;
+}
+.crowd_grey span{
+	color:#aaa;
+}
+.crowd_tooltip_botom_link {
+	clear: both;
+	text-align: right;
+}
+
+.crowd_tooltip_botom_link a {
+ color: #6699ff;
+ font:bold 15px arial, sans-serif;
+ line-height: 20px;
+}
+.crowd_box_label {
+ text-align: left;
+ line-height: 20px;
+ color: #777;
+ font:bold 15px arial, sans-serif;
+ clear: both;
+ padding:10px;
+}
+
+.crowd_sub_level1 {
+ background-color: #ddd;
+}
+.crowd_arrow_up1 {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-bottom: 20px solid #ddd;
+	position: absolute;
+	display: none;
+}
+
+.crowd_sub_level2 {
+ background-color: #ccc;
+}
+.crowd_arrow_up2 {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-bottom: 20px solid #ccc;
+	position: absolute;
+	display: none;
+}
+.crowd_sub_level3 {
+ background-color: #bbb;
+}
+.crowd_arrow_up3 {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-bottom: 20px solid #bbb;
+	position: absolute;
+	display: none;
+}

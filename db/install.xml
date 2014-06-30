@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/crowd/db" VERSION="20130828" COMMENT="XMLDB file for Moodle local/crowd"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="crowd" COMMENT="Each record represents one crowd." NEXT="crowd_members">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="contextid"/>
+        <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="name"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="254" NOTNULL="true" SEQUENCE="false" PREVIOUS="contextid" NEXT="idnumber"/>
+        <FIELD NAME="idnumber" TYPE="char" LENGTH="100" NOTNULL="false" SEQUENCE="false" PREVIOUS="name" NEXT="description"/>
+        <FIELD NAME="description" TYPE="text" LENGTH="big" NOTNULL="false" SEQUENCE="false" PREVIOUS="idnumber" NEXT="descriptionformat"/>
+        <FIELD NAME="descriptionformat" TYPE="int" LENGTH="2" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="description" NEXT="option_val"/>
+        <FIELD NAME="option_val" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="descriptionformat" NEXT="timecreated"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="option_val" NEXT="timemodified"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="timecreated"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+    </TABLE>
+    <TABLE NAME="crowd_members" COMMENT="Link a crowd to a cohort." PREVIOUS="crowd" NEXT="crowd_course">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="crowdid"/>
+        <FIELD NAME="crowdid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="cohortid"/>
+        <FIELD NAME="cohortid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="crowdid" NEXT="timeadded"/>
+        <FIELD NAME="timeadded" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="cohortid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="mdl_crowmemb_cohcro_uix" TYPE="unique" FIELDS="cohortid, crowdid" NEXT="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" PREVIOUS="mdl_crowmemb_cohcro_uix"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="mdl_crowmemb_coh_ix" UNIQUE="false" FIELDS="cohortid" NEXT="mdl_crowmemb_cro_ix"/>
+        <INDEX NAME="mdl_crowmemb_cro_ix" UNIQUE="false" FIELDS="crowdid" PREVIOUS="mdl_crowmemb_coh_ix"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="crowd_course" COMMENT="Link a crowd to a course." PREVIOUS="crowd_members" NEXT="crowd_course_categories">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="crowdid"/>
+        <FIELD NAME="crowdid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="courseid"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="crowdid" NEXT="timeadded"/>
+        <FIELD NAME="timeadded" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="courseid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="mdl_crowcour_coucro_uix" TYPE="unique" FIELDS="courseid, crowdid" NEXT="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" PREVIOUS="mdl_crowcour_coucro_uix"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="mdl_crowcour_cou_ix" UNIQUE="false" FIELDS="courseid" NEXT="mdl_crowcour_cro_ix"/>
+        <INDEX NAME="mdl_crowcour_cro_ix" UNIQUE="false" FIELDS="crowdid" PREVIOUS="mdl_crowcour_cou_ix"/>
+      </INDEXES>
+    </TABLE>
+    <TABLE NAME="crowd_course_categories" COMMENT="Link a crowd to a course_category." PREVIOUS="crowd_course">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="crowdid"/>
+        <FIELD NAME="crowdid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="coursecategoryid"/>
+        <FIELD NAME="coursecategoryid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="crowdid" NEXT="timeadded"/>
+        <FIELD NAME="timeadded" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="coursecategoryid"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="mdl_crowcourcate_coucro_uix" TYPE="unique" FIELDS="coursecategoryid, crowdid" NEXT="primary"/>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id" PREVIOUS="mdl_crowcourcate_coucro_uix"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="mdl_crowcourcate_cou_ix" UNIQUE="false" FIELDS="coursecategoryid" NEXT="mdl_crowcourcate_cro_ix"/>
+        <INDEX NAME="mdl_crowcourcate_cro_ix" UNIQUE="false" FIELDS="crowdid" PREVIOUS="mdl_crowcourcate_cou_ix"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
