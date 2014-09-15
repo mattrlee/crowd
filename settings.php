@@ -1,10 +1,10 @@
 <?php
-require_once($CFG->dirroot.'/local/crowd/settingslib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog/settingslib.php');
 if (!$ADMIN->locate('crowd_menuitem'))
 {
-	$ADMIN->add('root', new admin_category('crowd_menuitem', get_string('crowd_menuitem', 'local_crowd')));
+	$ADMIN->add('root', new admin_category('crowd_menuitem', get_string('crowd_menuitem', 'local_enlightencatalog')));
 }
-$ADMIN->add('crowd_menuitem', new admin_externalpage('crowd_addedit', get_string('crowd_addedit','local_crowd'), "$CFG->wwwroot/local/crowd/index.php"));
+$ADMIN->add('crowd_menuitem', new admin_externalpage('crowd_addedit', get_string('crowd_addedit','local_enlightencatalog'), "$CFG->wwwroot/local/enlightencatalog//index.php"));
 
 $settings = $ADMIN->locate('frontpagesettings');
 

@@ -37,17 +37,17 @@ class crowd_edit_form extends moodleform {
         $editoroptions = $this->_customdata['editoroptions'];
         $crowd = $this->_customdata['data'];
 
-        $mform->addElement('text', 'name', get_string('name', 'local_crowd'), 'maxlength="254" size="50"');
+        $mform->addElement('text', 'name', get_string('name', 'local_enlightencatalog'), 'maxlength="254" size="50"');
         $mform->addRule('name', get_string('required'), 'required', null, 'client');
         $mform->setType('name', PARAM_TEXT);
 
         $mform->addElement('hidden', 'contextid', $crowd->contextid);
         $mform->setType('contextid', PARAM_RAW);
 
-        $mform->addElement('text', 'idnumber', get_string('idnumber', 'local_crowd'), 'maxlength="254" size="50"');
+        $mform->addElement('text', 'idnumber', get_string('idnumber', 'local_enlightencatalog'), 'maxlength="254" size="50"');
         $mform->setType('idnumber', PARAM_RAW); // Idnumbers are plain text, must not be changed.
 
-        $mform->addElement('editor', 'description_editor', get_string('description', 'local_crowd'), null, $editoroptions);
+        $mform->addElement('editor', 'description_editor', get_string('description', 'local_enlightencatalog'), null, $editoroptions);
         $mform->setType('description_editor', PARAM_RAW);
 
         $mform->addElement('hidden', 'id');
@@ -71,13 +71,13 @@ class crowd_edit_form extends moodleform {
             $current = $DB->get_record('crowd', array('id'=>$data['id']), '*', MUST_EXIST);
             if ($current->idnumber !== $idnumber) {
                 if ($DB->record_exists('crowd', array('idnumber'=>$idnumber))) {
-                    $errors['idnumber'] = get_string('duplicateidnumber', 'local_crowd');
+                    $errors['idnumber'] = get_string('duplicateidnumber', 'local_enlightencatalog');
                 }
             }
 
         } else {
             if ($DB->record_exists('crowd', array('idnumber'=>$idnumber))) {
-                $errors['idnumber'] = get_string('duplicateidnumber', 'local_crowd');
+                $errors['idnumber'] = get_string('duplicateidnumber', 'local_enlightencatalog');
             }
         }
 

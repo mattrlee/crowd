@@ -1,17 +1,17 @@
 <?php
-$string['pluginname'] = 'Crowd';
+$string['pluginname'] = 'EnlightenCatalog';
 
-$string['crowd_menuitem'] = 'Crowds';
+$string['crowd_menuitem'] = 'EnlightenCatalog';
 $string['crowd_addedit'] = 'Add / Edit Crowds';
 
-$string['crowdsin'] = 'Crowds';
+$string['crowdsin'] = 'EnlightenCatalog Crowds';
 $string['name'] = 'Name';
 $string['idnumber'] = 'Crowd ID';
 $string['description'] = 'Description';
 $string['memberscount'] = 'Members';
 $string['option_val'] = 'Option';
 $string['crowd_addedit'] = 'Add / Edit Crowds';
-$string['crowd_assigment'] = 'Crowd Control Assignments';
+$string['crowd_assignment'] = 'Crowd Assignments';
 
 $string['searchcrowd'] = 'Search Crowd';
 $string['search'] = 'Search';
@@ -33,7 +33,7 @@ $string['backtocrowds'] = 'Back to list';
 
 $string['assign'] = 'Assign';
 $string['assignto'] = 'Assign to';
-$string['assign_control'] = 'Crowd Control Settings';
+$string['assign_control'] = 'EnlightenCatalog Settings';
 
 $string['save'] = 'Save';
 
@@ -44,8 +44,8 @@ $string['previouslyselectedoptions'] = 'Previously selected';
 $string['nomatchingoptions'] = 'Not matching';
 $string['nomatchingrows'] = 'No Matching Rows';
 
-$string['customfrontpage'] = 'Crowd Frontpage Block';
-$string['customconfigfrontpage'] = 'Controls crowd block display';
+$string['customfrontpage'] = 'EnlightenCatalog Frontpage Block';
+$string['customconfigfrontpage'] = 'Controls EnlightenCatalog block display';
 $string['errorsetting'] = 'Error in settings';
 
 $string['delcrowd'] = 'Delete Crowd';

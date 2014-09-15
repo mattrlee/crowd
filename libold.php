@@ -30,12 +30,12 @@ if ($_SERVER['PHP_SELF'] == parse_url($CFG->wwwroot, PHP_URL_PATH).'/index.php')
 
 	$visibility = 1;
 	if ($visibility) {
-		$PAGE->requires->css('/local/crowd/homepage_overrider.css'); 
-		$PAGE->requires->css('/local/crowd/tooltipster.css'); 
-		$PAGE->requires->js('/local/crowd/jquery.min.js', true); 
-		$PAGE->requires->js('/local/crowd/jquery.tooltipster.min.js', true); 
-		$PAGE->requires->js('/local/crowd/jquery.colorbox-min.js', true); 
-		$PAGE->requires->js('/local/crowd/homepage_overrider.js', true); 
+		$PAGE->requires->css('/local/enlightencatalog//homepage_overrider.css'); 
+		$PAGE->requires->css('/local/enlightencatalog//tooltipster.css'); 
+		$PAGE->requires->js('/local/enlightencatalog//jquery.min.js', true); 
+		$PAGE->requires->js('/local/enlightencatalog//jquery.tooltipster.min.js', true); 
+		$PAGE->requires->js('/local/enlightencatalog//jquery.colorbox-min.js', true); 
+		$PAGE->requires->js('/local/enlightencatalog//homepage_overrider.js', true); 
 	}
 }
 
@@ -99,9 +99,9 @@ function crowd_update_crowd($crowd) {
 function crowd_delete_crowd($crowd) {
     global $DB;
 
-    $DB->delete_records('crowd_course', array('crowdid'=>$crowd->id));
-    $DB->delete_records('crowd_course_categories', array('crowdid'=>$crowd->id));
-    $DB->delete_records('crowd_members', array('crowdid'=>$crowd->id));
+    $DB->delete_records('ecatalog_crowd_course', array('crowdid'=>$crowd->id));
+    $DB->delete_records('ecatalog_crowd_course_cats', array('crowdid'=>$crowd->id));
+    $DB->delete_records('ecatalog_crowd_members', array('crowdid'=>$crowd->id));
     $DB->delete_records('crowd', array('id'=>$crowd->id));
 
     events_trigger('crowd_deleted', $crowd);
@@ -109,7 +109,7 @@ function crowd_delete_crowd($crowd) {
 
 function crowd_add_member($crowdid, $cohortid) {
     global $DB;
-    if ($DB->record_exists('crowd_members', array('crowdid'=>$crowdid, 'cohortid'=>$cohortid))) {
+    if ($DB->record_exists('ecatalog_crowd_members', array('crowdid'=>$crowdid, 'cohortid'=>$cohortid))) {
         // No duplicates!
         return;
     }
@@ -117,21 +117,21 @@ function crowd_add_member($crowdid, $cohortid) {
     $record->crowdid  = $crowdid;
     $record->cohortid    = $cohortid;
     $record->timeadded = time();
-    $DB->insert_record('crowd_members', $record);
+    $DB->insert_record('ecatalog_crowd_members', $record);
 
     events_trigger('crowd_member_added', (object)array('crowdid'=>$crowdid, 'cohortid'=>$cohortid));
 }
 
 function crowd_remove_member($crowdid, $cohortid) {
     global $DB;
-    $DB->delete_records('crowd_members', array('crowdid'=>$crowdid, 'cohortid'=>$cohortid));
+    $DB->delete_records('ecatalog_crowd_members', array('crowdid'=>$crowdid, 'cohortid'=>$cohortid));
 
     events_trigger('crowd_member_removed', (object)array('crowdid'=>$crowdid, 'cohortid'=>$cohortid));
 }
 
 function crowd_add_course($crowdid, $courseid) {
     global $DB;
-    if ($DB->record_exists('crowd_course', array('crowdid'=>$crowdid, 'courseid'=>$courseid))) {
+    if ($DB->record_exists('ecatalog_crowd_course', array('crowdid'=>$crowdid, 'courseid'=>$courseid))) {
         // No duplicates!
         return;
     }
@@ -139,21 +139,21 @@ function crowd_add_course($crowdid, $courseid) {
     $record->crowdid  = $crowdid;
     $record->courseid    = $courseid;
     $record->timeadded = time();
-    $DB->insert_record('crowd_course', $record);
+    $DB->insert_record('ecatalog_crowd_course', $record);
 
-    events_trigger('crowd_course_added', (object)array('crowdid'=>$crowdid, 'courseid'=>$courseid));
+    events_trigger('ecatalog_crowd_course_added', (object)array('crowdid'=>$crowdid, 'courseid'=>$courseid));
 }
 
 function crowd_remove_course($crowdid, $courseid) {
     global $DB;
-    $DB->delete_records('crowd_course', array('crowdid'=>$crowdid, 'courseid'=>$courseid));
+    $DB->delete_records('ecatalog_crowd_course', array('crowdid'=>$crowdid, 'courseid'=>$courseid));
 
-    events_trigger('crowd_course_removed', (object)array('crowdid'=>$crowdid, 'courseid'=>$courseid));
+    events_trigger('ecatalog_crowd_course_removed', (object)array('crowdid'=>$crowdid, 'courseid'=>$courseid));
 }
 
 function crowd_add_category($crowdid, $catid) {
     global $DB;
-    if ($DB->record_exists('crowd_course_categories', array('crowdid'=>$crowdid, 'coursecategoryid'=>$catid))) {
+    if ($DB->record_exists('ecatalog_crowd_course_cats', array('crowdid'=>$crowdid, 'coursecategoryid'=>$catid))) {
         // No duplicates!
         return;
     }
@@ -161,14 +161,14 @@ function crowd_add_category($crowdid, $catid) {
     $record->crowdid  = $crowdid;
     $record->coursecategoryid    = $catid;
     $record->timeadded = time();
-    $DB->insert_record('crowd_course_categories', $record);
+    $DB->insert_record('ecatalog_crowd_course_cats', $record);
 
     events_trigger('crowd_category_added', (object)array('crowdid'=>$crowdid, 'coursecategoryid'=>$catid));
 }
 
 function crowd_remove_category($crowdid, $catid) {
     global $DB;
-    $DB->delete_records('crowd_course_categories', array('crowdid'=>$crowdid, 'coursecategoryid'=>$catid));
+    $DB->delete_records('ecatalog_crowd_course_cats', array('crowdid'=>$crowdid, 'coursecategoryid'=>$catid));
 
     events_trigger('crowd_category_removed', (object)array('crowdid'=>$crowdid, 'coursecategoryid'=>$catid));
 }
@@ -182,7 +182,7 @@ function crowd_remove_category($crowdid, $catid) {
 function crowd_is_member($crowdid, $cohortid) {
     global $DB;
 
-    return $DB->record_exists('crowd_members', array('crowdid'=>$crowdid, 'userid'=>$cohortid));
+    return $DB->record_exists('ecatalog_crowd_members', array('crowdid'=>$crowdid, 'userid'=>$cohortid));
 }
 
 

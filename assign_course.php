@@ -23,8 +23,8 @@
  */
 
 require('../../config.php');
-require_once($CFG->dirroot.'/local/crowd/selector/lib.php');
-require_once($CFG->dirroot.'/local/crowd/lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog//selector/lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog//lib.php');
 
 $id = required_param('id', PARAM_INT);
 
@@ -33,27 +33,27 @@ require_login();
 $crowd = $DB->get_record('crowd', array('id'=>$id), '*', MUST_EXIST);
 $context = get_context_instance(CONTEXT_SYSTEM);
 
-require_capability('local/crowd:manage', $context);
+require_capability('local/enlightencatalog:manage', $context);
 
 $PAGE->set_context($context);
-$PAGE->set_url('/local/crowd/assign_course.php', array('id'=>$id));
+$PAGE->set_url('/local/enlightencatalog//assign_course.php', array('id'=>$id));
 
-$returnurl = new moodle_url('/local/crowd/assign_control.php', array('id'=>$crowd->id));
+$returnurl = new moodle_url('/local/enlightencatalog//assign_control.php', array('id'=>$crowd->id));
 
 if (optional_param('cancel', false, PARAM_BOOL)) {
     redirect($returnurl);
 }
 
-navigation_node::override_active_url(new moodle_url('/local/crowd/index.php', array()));
+navigation_node::override_active_url(new moodle_url('/local/enlightencatalog//index.php', array()));
 $PAGE->set_pagelayout('admin');
 
-$PAGE->navbar->add(get_string('assign', 'local_crowd'));
+$PAGE->navbar->add(get_string('assign', 'local_enlightencatalog'));
 
-$PAGE->set_title(get_string('assign', 'local_crowd'));
+$PAGE->set_title(get_string('assign', 'local_enlightencatalog'));
 $PAGE->set_heading($crowd->name);
 
 if (!crowd_is_ajax_request())echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('assignto', 'local_crowd', format_string($crowd->name)));
+echo $OUTPUT->heading(get_string('assignto', 'local_enlightencatalog', format_string($crowd->name)));
 
 // Get the user_selector we will need.
 $potentialcourseselector = new course_potential_selector('addselect', array('crowdid'=>$crowd->id, 'accesscontext'=>$context));
@@ -94,7 +94,7 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
   <table summary="" class="generaltable generalbox boxaligncenter" cellspacing="0">
     <tr>
       <td id="existingcell">
-          <p><label for="removeselect"><?php print_string('currentcourses', 'local_crowd'); ?></label></p>
+          <p><label for="removeselect"><?php print_string('currentcourses', 'local_enlightencatalog'); ?></label></p>
           <?php  $existingcourseselector->display() ?>
       </td>
       <td id="buttonscell">
@@ -107,12 +107,12 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
           </div>
       </td>
       <td id="potentialcell">
-          <p><label for="addselect"><?php print_string('potcourses', 'local_crowd'); ?></label></p>
+          <p><label for="addselect"><?php print_string('potcourses', 'local_enlightencatalog'); ?></label></p>
           <?php $potentialcourseselector->display() ?>
       </td>
     </tr>
     <tr><td colspan="3" id='backcell'>
-      <input type="submit" id="back_to_list" name="cancel" value="<?php p(get_string('backtocrowds', 'local_crowd')); ?>" />
+      <input type="submit" id="back_to_list" name="cancel" value="<?php p(get_string('backtocrowds', 'local_enlightencatalog')); ?>" />
     </td></tr>
   </table>
 </div></form>

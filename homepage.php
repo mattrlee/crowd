@@ -1,7 +1,7 @@
 <?php
 	require('../../config.php');
-	require($CFG->dirroot.'/local/crowd/lib.php');
-	require_once($CFG->dirroot.'/local/crowd/settingslib.php');
+	require($CFG->dirroot.'/local/enlightencatalog//lib.php');
+	require_once($CFG->dirroot.'/local/enlightencatalog//settingslib.php');
 	$cat_list = get_tree_of_courses();
 	$course_list = get_list_of_courses();
 	$settings = new admin_setting_cccourselist_frontpage();

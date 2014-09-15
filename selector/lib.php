@@ -109,7 +109,7 @@ abstract class crowd_selector_base {
         if (isset($options['extrafields'])) {
             $this->extrafields = $options['extrafields'];
         } else if (!empty($CFG->showcohortidentity) &&
-                has_capability('local/crowd:manage', $this->accesscontext)) {
+                has_capability('local/enlightencatalog:manage', $this->accesscontext)) {
             $this->extrafields = explode(',', $CFG->showcohortidentity);
         } else {
             $this->extrafields = array();
@@ -243,9 +243,9 @@ abstract class crowd_selector_base {
         if (!crowd_selector_base::$searchoptionsoutput && false) {
             $output .= print_collapsible_region_start('', 'rowselector_options',
                     get_string('searchoptions'), 'rowselector_optionscollapsed', true, true);
-            $output .= $this->option_checkbox('preserveselected', $this->preserveselected, get_string('rowselectorpreserveselected','local_crowd'));
-            $output .= $this->option_checkbox('autoselectunique', $this->autoselectunique, get_string('rowselectorautoselectunique','local_crowd'));
-            $output .= $this->option_checkbox('searchanywhere', $this->searchanywhere, get_string('rowselectorsearchanywhere','local_crowd'));
+            $output .= $this->option_checkbox('preserveselected', $this->preserveselected, get_string('rowselectorpreserveselected','local_enlightencatalog'));
+            $output .= $this->option_checkbox('autoselectunique', $this->autoselectunique, get_string('rowselectorautoselectunique','local_enlightencatalog'));
+            $output .= $this->option_checkbox('searchanywhere', $this->searchanywhere, get_string('rowselectorsearchanywhere','local_enlightencatalog'));
             $output .= print_collapsible_region_end(true);
 
             crowd_selector_base::$searchoptionsoutput = true;
@@ -445,10 +445,10 @@ abstract class crowd_selector_base {
             $a = new stdClass;
             $a->count = $count;
             $a->search = $search;
-            return array(get_string('toomanyrowsmatchsearch', 'local_crowd', $a) => array(),
+            return array(get_string('toomanyrowsmatchsearch', 'local_enlightencatalog', $a) => array(),
                     get_string('pleasesearchmore') => array());
         } else {
-            return array(get_string('toomanyrowstoshow', 'local_crowd', $count) => array(),
+            return array(get_string('toomanyrowstoshow', 'local_enlightencatalog', $count) => array(),
                     get_string('pleaseusesearch') => array());
         }
     }
@@ -472,7 +472,7 @@ abstract class crowd_selector_base {
         $select = false;
         if (empty($groupedrows)) {
             if (!empty($search)) {
-                $groupedrows = array(get_string('nomatchingrows', 'local_crowd', $search) => array());
+                $groupedrows = array(get_string('nomatchingrows', 'local_enlightencatalog', $search) => array());
             } else {
                 $groupedrows = array(get_string('none') => array());
             }

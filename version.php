@@ -28,10 +28,10 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2014010900;
+$plugin->version   = 2014091500;
 $plugin->requires  = 2011070100;
 $plugin->cron = 0;
-$plugin->component = 'local_crowd';
+$plugin->component = 'local_enlightencatalog';
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->release  = '1.0';
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<XMLDB PATH="local/crowd/db" VERSION="20130828" COMMENT="XMLDB file for Moodle local/crowd"
+<XMLDB PATH="local/enlightencatalog/db" VERSION="20130828" COMMENT="XMLDB file for Moodle local/enlightencatalog"
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
 >
   <TABLES>
-    <TABLE NAME="crowd" COMMENT="Each record represents one crowd." NEXT="crowd_members">
+    <TABLE NAME="ecatalog" COMMENT="Each record represents one crowd." NEXT="crowd_members">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="contextid"/>
         <FIELD NAME="contextid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" SEQUENCE="false" PREVIOUS="id" NEXT="name"/>
@@ -20,7 +20,7 @@
         <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
       </KEYS>
     </TABLE>
-    <TABLE NAME="crowd_members" COMMENT="Link a crowd to a cohort." PREVIOUS="crowd" NEXT="crowd_course">
+    <TABLE NAME="ecatalog_crowd_members" COMMENT="Link a crowd to a cohort." PREVIOUS="crowd" NEXT="crowd_course">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="crowdid"/>
         <FIELD NAME="crowdid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="cohortid"/>
@@ -36,7 +36,7 @@
         <INDEX NAME="mdl_crowmemb_cro_ix" UNIQUE="false" FIELDS="crowdid" PREVIOUS="mdl_crowmemb_coh_ix"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="crowd_course" COMMENT="Link a crowd to a course." PREVIOUS="crowd_members" NEXT="crowd_course_categories">
+    <TABLE NAME="ecatalog_crowd_course" COMMENT="Link a crowd to a course." PREVIOUS="crowd_members" NEXT="crowd_course_categories">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="crowdid"/>
         <FIELD NAME="crowdid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="courseid"/>
@@ -52,7 +52,7 @@
         <INDEX NAME="mdl_crowcour_cro_ix" UNIQUE="false" FIELDS="crowdid" PREVIOUS="mdl_crowcour_cou_ix"/>
       </INDEXES>
     </TABLE>
-    <TABLE NAME="crowd_course_categories" COMMENT="Link a crowd to a course_category." PREVIOUS="crowd_course">
+    <TABLE NAME="ecatalog_crowd_course_cats" COMMENT="Link a crowd to a course_category." PREVIOUS="crowd_course">
       <FIELDS>
         <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="true" SEQUENCE="true" NEXT="crowdid"/>
         <FIELD NAME="crowdid" TYPE="int" LENGTH="10" NOTNULL="true" UNSIGNED="false" DEFAULT="0" SEQUENCE="false" PREVIOUS="id" NEXT="coursecategoryid"/>

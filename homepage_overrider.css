@@ -1,6 +1,6 @@
 #crowd_container {
  border: 1px solid #eee;
- width: 1050px;
+/* width: 1050px; */
  margin: 0 auto;
  }
 #crowd_container .loading{

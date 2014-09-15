@@ -23,8 +23,8 @@
  */
 
 require('../../config.php');
-require_once($CFG->dirroot.'/local/crowd/selector/lib.php');
-require_once($CFG->dirroot.'/local/crowd/lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog//selector/lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog//lib.php');
 
 $id = required_param('id', PARAM_INT);
 
@@ -33,16 +33,16 @@ require_login();
 $crowd = $DB->get_record('crowd', array('id'=>$id), '*', MUST_EXIST);
 $context = get_context_instance(CONTEXT_SYSTEM);
 
-require_capability('local/crowd:manage', $context);
+require_capability('local/enlightencatalog:manage', $context);
 
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/crowd/jquery.min.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/crowd/jquery.colorbox-min.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/crowd/module.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.min.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.colorbox-min.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//module.js') );
 
 $PAGE->set_context($context);
-$PAGE->set_url('/local/crowd/assign_control.php', array('id'=>$id));
+$PAGE->set_url('/local/enlightencatalog//assign_control.php', array('id'=>$id));
 
-$returnurl = new moodle_url('/local/crowd/index.php', array('contextid'=>$crowd->contextid));
+$returnurl = new moodle_url('/local/enlightencatalog//index.php', array('contextid'=>$crowd->contextid));
 
 if (optional_param('cancel', false, PARAM_BOOL)) {
     redirect($returnurl);
@@ -54,16 +54,16 @@ if (optional_param('save', false, PARAM_BOOL) && confirm_sesskey()) {
 	redirect($returnurl);
 }
 
-navigation_node::override_active_url(new moodle_url('/local/crowd/index.php', array()));
+navigation_node::override_active_url(new moodle_url('/local/enlightencatalog//index.php', array()));
 $PAGE->set_pagelayout('admin');
 
-$PAGE->navbar->add(get_string('assign_control', 'local_crowd'));
+$PAGE->navbar->add(get_string('assign_control', 'local_enlightencatalog'));
 
-$PAGE->set_title(get_string('assign_control', 'local_crowd'));
+$PAGE->set_title(get_string('assign_control', 'local_enlightencatalog'));
 $PAGE->set_heading($crowd->name);
 
 echo $OUTPUT->header();
-echo $OUTPUT->heading(get_string('assign_control', 'local_crowd', format_string($crowd->name)));
+echo $OUTPUT->heading(get_string('assign_control', 'local_enlightencatalog', format_string($crowd->name)));
 
 // Get the user_selector we will need.
 $existingcourseselector = new course_existing_selector('courseselect', array('crowdid'=>$crowd->id, 'accesscontext'=>$context));
@@ -80,17 +80,17 @@ $existingcatselector = new course_cat_existing_selector('catselect', array('crow
   <table summary="" class="generalbox boxaligncenter" cellspacing="0">
     <tr>
       <td>
-          <p><?php print_string('potcourses', 'local_crowd'); ?></p>
-	  	  <form id="assign_course_form" method="post" action="<?php echo new moodle_url('/local/crowd/assign_course.php', array('id'=>$crowd->id)) ?>">
-            <input name="assign" id="assign_course_link" pid="<?php echo $crowd->id ?>" type="submit" value="<?php p(get_string('assign', 'local_crowd')); ?>" /><br />
-            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/crowd/assign_course.php', array('id'=>$crowd->id)),'id'=>'assign_course_link_val'.$crowd->id, 'type'=>'hidden'));?>
+          <p><?php print_string('potcourses', 'local_enlightencatalog'); ?></p>
+	  	  <form id="assign_course_form" method="post" action="<?php echo new moodle_url('/local/enlightencatalog//assign_course.php', array('id'=>$crowd->id)) ?>">
+            <input name="assign" id="assign_course_link" pid="<?php echo $crowd->id ?>" type="submit" value="<?php p(get_string('assign', 'local_enlightencatalog')); ?>" /><br />
+            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog//assign_course.php', array('id'=>$crowd->id)),'id'=>'assign_course_link_val'.$crowd->id, 'type'=>'hidden'));?>
     	  </form>
       </td>
       <td>
-          <p><?php print_string('potcats', 'local_crowd'); ?></p>
-	  	  <form id="assign_cat_form" method="post" action="<?php echo new moodle_url('/local/crowd/assign_category.php', array('id'=>$crowd->id)) ?>">
-            <input name="assign" id="assign_cat_link" pid="<?php echo $crowd->id ?>" type="submit" value="<?php p(get_string('assign', 'local_crowd')); ?>" /><br />
-            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/crowd/assign_category.php', array('id'=>$crowd->id)),'id'=>'assign_cat_link_val'.$crowd->id, 'type'=>'hidden'));?>
+          <p><?php print_string('potcats', 'local_enlightencatalog'); ?></p>
+	  	  <form id="assign_cat_form" method="post" action="<?php echo new moodle_url('/local/enlightencatalog//assign_category.php', array('id'=>$crowd->id)) ?>">
+            <input name="assign" id="assign_cat_link" pid="<?php echo $crowd->id ?>" type="submit" value="<?php p(get_string('assign', 'local_enlightencatalog')); ?>" /><br />
+            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog//assign_category.php', array('id'=>$crowd->id)),'id'=>'assign_cat_link_val'.$crowd->id, 'type'=>'hidden'));?>
     	  </form>
       </td>
       <td colspan="2">
@@ -108,17 +108,17 @@ $existingcatselector = new course_cat_existing_selector('catselect', array('crow
        </select>
       </td>
       <td>
-            <input name="save" id="save" type="submit" value="<?php p(get_string('save', 'local_crowd')); ?>" /><br />
-      		<input type="submit" id="back_to_list" name="cancel" value="<?php p(get_string('backtocrowds', 'local_crowd')); ?>" />
+            <input name="save" id="save" type="submit" value="<?php p(get_string('save', 'local_enlightencatalog')); ?>" /><br />
+      		<input type="submit" id="back_to_list" name="cancel" value="<?php p(get_string('backtocrowds', 'local_enlightencatalog')); ?>" />
       </td>
     </tr>
     <tr>
       <td>
-          <p><label for="addselect"><?php print_string('currentcourses', 'local_crowd'); ?></label></p>
+          <p><label for="addselect"><?php print_string('currentcourses', 'local_enlightencatalog'); ?></label></p>
           <?php  $existingcourseselector->display() ?>
       </td>
       <td>
-          <p><label for="addselect"><?php print_string('currentcats', 'local_crowd'); ?></label></p>
+          <p><label for="addselect"><?php print_string('currentcats', 'local_enlightencatalog'); ?></label></p>
           <?php  $existingcatselector->display() ?>
       </td>
       <td>

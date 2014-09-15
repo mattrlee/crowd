@@ -14,8 +14,8 @@ class admin_setting_cccourselist_frontpage extends admin_setting {
     public function __construct() {
         global $CFG;
         $name        = 'customfrontpage';
-        $visiblename = get_string('customfrontpage','local_crowd');
-        $description = get_string('customconfigfrontpage','local_crowd');
+        $visiblename = get_string('customfrontpage','local_enlightencatalog');
+        $description = get_string('customconfigfrontpage','local_enlightencatalog');
         $defaults    = array();
         parent::__construct($name, $visiblename, $description, $defaults);
     }
@@ -71,7 +71,7 @@ class admin_setting_cccourselist_frontpage extends admin_setting {
             }
             $save[$datum] = $datum; // no duplicates
         }
-        return ($this->config_write($this->name, implode(',', $save)) ? '' : get_string('errorsetting', 'local_crowd'));
+        return ($this->config_write($this->name, implode(',', $save)) ? '' : get_string('errorsetting', 'local_enlightencatalog'));
     }
 
     /**
