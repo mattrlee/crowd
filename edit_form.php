@@ -68,7 +68,7 @@ class crowd_edit_form extends moodleform {
             // Fine, empty is ok.
 
         } else if ($data['id']) {
-            $current = $DB->get_record('crowd', array('id'=>$data['id']), '*', MUST_EXIST);
+            $current = $DB->get_record('ecatalog', array('id'=>$data['id']), '*', MUST_EXIST);
             if ($current->idnumber !== $idnumber) {
                 if ($DB->record_exists('crowd', array('idnumber'=>$idnumber))) {
                     $errors['idnumber'] = get_string('duplicateidnumber', 'local_enlightencatalog');

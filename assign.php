@@ -30,7 +30,7 @@ $id = required_param('id', PARAM_INT);
 
 require_login();
 
-$crowd = $DB->get_record('crowd', array('id'=>$id), '*', MUST_EXIST);
+$crowd = $DB->get_record('ecatalog', array('id'=>$id), '*', MUST_EXIST);
 $context = get_context_instance(CONTEXT_SYSTEM);
 
 require_capability('local/enlightencatalog:manage', $context);

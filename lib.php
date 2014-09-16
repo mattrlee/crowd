@@ -71,7 +71,7 @@ function crowd_add_crowd($crowd) {
         $crowd->timemodified = $crowd->timecreated;
     }
 
-    $crowd->id = $DB->insert_record('crowd', $crowd);
+    $crowd->id = $DB->insert_record('ecatalog', $crowd);
 
     events_trigger('crowd_added', $crowd);
 
@@ -87,7 +87,7 @@ function crowd_update_crowd($crowd) {
     global $DB;
     if ($crowd->option_val!=1) $crowd->option_val=0;
     $crowd->timemodified = time();
-    $DB->update_record('crowd', $crowd);
+    $DB->update_record('ecatalog', $crowd);
 
     events_trigger('crowd_updated', $crowd);
 }
@@ -103,7 +103,7 @@ function crowd_delete_crowd($crowd) {
     $DB->delete_records('ecatalog_crowd_course', array('crowdid'=>$crowd->id));
     $DB->delete_records('ecatalog_crowd_course_cats', array('crowdid'=>$crowd->id));
     $DB->delete_records('ecatalog_crowd_members', array('crowdid'=>$crowd->id));
-    $DB->delete_records('crowd', array('id'=>$crowd->id));
+    $DB->delete_records('ecatalog', array('id'=>$crowd->id));
 
     events_trigger('crowd_deleted', $crowd);
 }
@@ -220,7 +220,7 @@ function crowd_get_crowds($contextid, $page = 0, $perpage = 25, $search = '') {
     $sql = " FROM {ecatalog}
              WHERE $wherecondition";
     $order = " ORDER BY name ASC, idnumber ASC";
-    $allcrowds = $DB->count_records('crowd', array('contextid'=>$contextid));
+    $allcrowds = $DB->count_records('ecatalog', array('contextid'=>$contextid));
     $totalcrowds = $DB->count_records_sql($countfields . $sql, $params);
     $crowds = $DB->get_records_sql($fields . $sql . $order, $params, $page*$perpage, $perpage);
 

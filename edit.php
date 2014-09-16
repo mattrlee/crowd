@@ -35,7 +35,7 @@ require_login();
 
 $category = null;
 if ($id) {
-    $crowd = $DB->get_record('crowd', array('id'=>$id), '*', MUST_EXIST);
+    $crowd = $DB->get_record('ecatalog', array('id'=>$id), '*', MUST_EXIST);
     $context = get_context_instance(CONTEXT_SYSTEM);
 } else {
     $context = get_context_instance(CONTEXT_SYSTEM);
