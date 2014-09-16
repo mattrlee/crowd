@@ -23,8 +23,8 @@
  */
 
 require('../../config.php');
-require_once($CFG->dirroot.'/local/enlightencatalog//selector/lib.php');
-require_once($CFG->dirroot.'/local/enlightencatalog//lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog/selector/lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog/lib.php');
 
 $id = required_param('id', PARAM_INT);
 
@@ -36,15 +36,15 @@ $context = get_context_instance(CONTEXT_SYSTEM);
 require_capability('local/enlightencatalog:manage', $context);
 
 $PAGE->set_context($context);
-$PAGE->set_url('/local/enlightencatalog//assign_course.php', array('id'=>$id));
+$PAGE->set_url('/local/enlightencatalog/assign_course.php', array('id'=>$id));
 
-$returnurl = new moodle_url('/local/enlightencatalog//assign_control.php', array('id'=>$crowd->id));
+$returnurl = new moodle_url('/local/enlightencatalog/assign_control.php', array('id'=>$crowd->id));
 
 if (optional_param('cancel', false, PARAM_BOOL)) {
     redirect($returnurl);
 }
 
-navigation_node::override_active_url(new moodle_url('/local/enlightencatalog//index.php', array()));
+navigation_node::override_active_url(new moodle_url('/local/enlightencatalog/index.php', array()));
 $PAGE->set_pagelayout('admin');
 
 $PAGE->navbar->add(get_string('assign', 'local_enlightencatalog'));

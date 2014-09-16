@@ -23,8 +23,8 @@
  */
 
 require('../../config.php');
-require_once($CFG->dirroot.'/local/enlightencatalog//selector/lib.php');
-require_once($CFG->dirroot.'/local/enlightencatalog//lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog/selector/lib.php');
+require_once($CFG->dirroot.'/local/enlightencatalog/lib.php');
 
 $id = required_param('id', PARAM_INT);
 
@@ -35,14 +35,14 @@ $context = get_context_instance(CONTEXT_SYSTEM);
 
 require_capability('local/enlightencatalog:manage', $context);
 
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.min.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.colorbox-min.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//module.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.min.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.colorbox-min.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/module.js') );
 
 $PAGE->set_context($context);
-$PAGE->set_url('/local/enlightencatalog//assign_control.php', array('id'=>$id));
+$PAGE->set_url('/local/enlightencatalog/assign_control.php', array('id'=>$id));
 
-$returnurl = new moodle_url('/local/enlightencatalog//index.php', array('contextid'=>$crowd->contextid));
+$returnurl = new moodle_url('/local/enlightencatalog/index.php', array('contextid'=>$crowd->contextid));
 
 if (optional_param('cancel', false, PARAM_BOOL)) {
     redirect($returnurl);
@@ -54,7 +54,7 @@ if (optional_param('save', false, PARAM_BOOL) && confirm_sesskey()) {
 	redirect($returnurl);
 }
 
-navigation_node::override_active_url(new moodle_url('/local/enlightencatalog//index.php', array()));
+navigation_node::override_active_url(new moodle_url('/local/enlightencatalog/index.php', array()));
 $PAGE->set_pagelayout('admin');
 
 $PAGE->navbar->add(get_string('assign_control', 'local_enlightencatalog'));
@@ -81,16 +81,16 @@ $existingcatselector = new course_cat_existing_selector('catselect', array('crow
     <tr>
       <td>
           <p><?php print_string('potcourses', 'local_enlightencatalog'); ?></p>
-	  	  <form id="assign_course_form" method="post" action="<?php echo new moodle_url('/local/enlightencatalog//assign_course.php', array('id'=>$crowd->id)) ?>">
+	  	  <form id="assign_course_form" method="post" action="<?php echo new moodle_url('/local/enlightencatalog/assign_course.php', array('id'=>$crowd->id)) ?>">
             <input name="assign" id="assign_course_link" pid="<?php echo $crowd->id ?>" type="submit" value="<?php p(get_string('assign', 'local_enlightencatalog')); ?>" /><br />
-            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog//assign_course.php', array('id'=>$crowd->id)),'id'=>'assign_course_link_val'.$crowd->id, 'type'=>'hidden'));?>
+            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog/assign_course.php', array('id'=>$crowd->id)),'id'=>'assign_course_link_val'.$crowd->id, 'type'=>'hidden'));?>
     	  </form>
       </td>
       <td>
           <p><?php print_string('potcats', 'local_enlightencatalog'); ?></p>
-	  	  <form id="assign_cat_form" method="post" action="<?php echo new moodle_url('/local/enlightencatalog//assign_category.php', array('id'=>$crowd->id)) ?>">
+	  	  <form id="assign_cat_form" method="post" action="<?php echo new moodle_url('/local/enlightencatalog/assign_category.php', array('id'=>$crowd->id)) ?>">
             <input name="assign" id="assign_cat_link" pid="<?php echo $crowd->id ?>" type="submit" value="<?php p(get_string('assign', 'local_enlightencatalog')); ?>" /><br />
-            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog//assign_category.php', array('id'=>$crowd->id)),'id'=>'assign_cat_link_val'.$crowd->id, 'type'=>'hidden'));?>
+            <?php echo html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog/assign_category.php', array('id'=>$crowd->id)),'id'=>'assign_cat_link_val'.$crowd->id, 'type'=>'hidden'));?>
     	  </form>
       </td>
       <td colspan="2">
