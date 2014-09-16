@@ -641,7 +641,7 @@ class cohort_potential_selector extends groups_crowd_selector_base {
 		
         // Build the SQL
         $fields = "SELECT id, name ";
-        $sql = " FROM {cohort} as c WHERE id NOT in (SELECT cohortid from {crowd_members} WHERE crowdid = {$this->crowdid}) $searchcondition";
+        $sql = " FROM {cohort} as c WHERE id NOT in (SELECT cohortid from {ecatalog_crowd_members} WHERE crowdid = {$this->crowdid}) $searchcondition";
 
         $orderby = ' ORDER BY name';
 
@@ -671,7 +671,7 @@ class cohort_existing_selector extends groups_crowd_selector_base {
 		
         // Build the SQL
         $fields = "SELECT c.id, c.name ";
-        $sql = " FROM {cohort} as c WHERE id in (SELECT cohortid from {crowd_members} WHERE crowdid = {$this->crowdid}) $searchcondition";
+        $sql = " FROM {cohort} as c WHERE id in (SELECT cohortid from {ecatalog_crowd_members} WHERE crowdid = {$this->crowdid}) $searchcondition";
 
         $orderby = ' ORDER BY name';
 
@@ -701,7 +701,7 @@ class course_potential_selector extends groups_crowd_selector_base {
 		
         // Build the SQL
         $fields = "SELECT id, fullname ";
-        $sql = " FROM {course} as c WHERE id NOT in (SELECT courseid from {crowd_course} WHERE crowdid = {$this->crowdid}) $searchcondition";
+        $sql = " FROM {course} as c WHERE id NOT in (SELECT courseid from {ecatalog_crowd_course} WHERE crowdid = {$this->crowdid}) $searchcondition";
 
         $orderby = ' ORDER BY fullname';
 
@@ -731,7 +731,7 @@ class course_existing_selector extends groups_crowd_selector_base {
 		
         // Build the SQL
         $fields = "SELECT id, fullname ";
-        $sql = " FROM {course} as c WHERE id in (SELECT courseid from {crowd_course} WHERE crowdid = {$this->crowdid}) $searchcondition";
+        $sql = " FROM {course} as c WHERE id in (SELECT courseid from {ecatalog_crowd_course} WHERE crowdid = {$this->crowdid}) $searchcondition";
 
         $orderby = ' ORDER BY fullname';
 
@@ -761,7 +761,7 @@ class course_cat_potential_selector extends groups_crowd_selector_base {
 		
         // Build the SQL
         $fields = "SELECT id, name ";
-        $sql = " FROM {course_categories} as c WHERE id NOT in (SELECT	coursecategoryid from {crowd_course_categories} WHERE crowdid = {$this->crowdid}) $searchcondition";
+        $sql = " FROM {course_categories} as c WHERE id NOT in (SELECT	coursecategoryid from {ecatalog_crowd_course_cats} WHERE crowdid = {$this->crowdid}) $searchcondition";
 
         $orderby = ' ORDER BY name';
 
@@ -791,7 +791,7 @@ class course_cat_existing_selector extends groups_crowd_selector_base {
 		
         // Build the SQL
         $fields = "SELECT c.id, c.name ";
-        $sql = " FROM {course_categories} as c WHERE id in (SELECT	coursecategoryid from {crowd_course_categories} WHERE crowdid = {$this->crowdid}) $searchcondition";
+        $sql = " FROM {course_categories} as c WHERE id in (SELECT	coursecategoryid from {ecatalog_crowd_course_cats} WHERE crowdid = {$this->crowdid}) $searchcondition";
 
         $orderby = ' ORDER BY name';
 

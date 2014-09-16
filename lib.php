@@ -217,7 +217,7 @@ function crowd_get_crowds($contextid, $page = 0, $perpage = 25, $search = '') {
 
     $fields = "SELECT *";
     $countfields = "SELECT COUNT(1)";
-    $sql = " FROM {crowd}
+    $sql = " FROM {ecatalog}
              WHERE $wherecondition";
     $order = " ORDER BY name ASC, idnumber ASC";
     $allcrowds = $DB->count_records('crowd', array('contextid'=>$contextid));
@@ -242,18 +242,18 @@ function get_tree_of_courses($parent_id = 0, $parent_name = '') {
     //Also added "visibile" to skip over visible=0 records
 	$sql = "SELECT id, name, description, parent, coursecount, sortorder, visible, SUM(access) as access from ( 
 			(SELECT cc.id, cc.name, cc.description, parent, coursecount, cc.sortorder, cc.visible, 1 as access FROM {course_categories} as cc 
-			JOIN {crowd_course_categories} as ccc ON cc.id = ccc.coursecategoryid 
-			JOIN {crowd_members} AS cm ON cm.crowdid = ccc.crowdid
-			JOIN {crowd} AS cr ON cm.crowdid = cr.id
+			JOIN {ecatalog_crowd_course_cats} as ccc ON cc.id = ccc.coursecategoryid 
+			JOIN {ecatalog_crowd_members} AS cm ON cm.crowdid = ccc.crowdid
+			JOIN {ecatalog} AS cr ON cm.crowdid = cr.id
 			JOIN {cohort_members} AS chm ON chm.cohortid = cm.cohortid
 			JOIN {user} AS u ON u.id = chm.userid
 			WHERE u.id ={$USER->id} and cc.parent = {$parent_id}) UNION 
 			(SELECT cc.id, cc.name, cc.description, parent, coursecount, cc.sortorder, cc.visible, 0 as access FROM {course_categories} as cc 
-			JOIN {crowd_course_categories} as ccc ON cc.id = ccc.coursecategoryid 
-			JOIN {crowd} AS cr ON ccc.crowdid = cr.id
+			JOIN {ecatalog_crowd_course_cats} as ccc ON cc.id = ccc.coursecategoryid 
+			JOIN {ecatalog} AS cr ON ccc.crowdid = cr.id
 			WHERE cc.parent = {$parent_id} and cr.option_val = 1) UNION 
 			(SELECT cc.id, cc.name, cc.description, parent, coursecount, cc.sortorder, cc.visible, 1 as access FROM {course_categories} as cc
-			WHERE cc.parent = {$parent_id} AND cc.id NOT IN (SELECT coursecategoryid FROM {crowd_course_categories})
+			WHERE cc.parent = {$parent_id} AND cc.id NOT IN (SELECT coursecategoryid FROM {ecatalog_crowd_course_cats})
 			)) t GROUP BY id";
 		$sql.=' ORDER BY sortorder';
 			
@@ -298,22 +298,22 @@ function get_list_of_courses($category_id = 0) {
     //I added 'sortorder' to the queries
     global $DB, $USER;
 	$sql = "SELECT c.id, c.summary as description, fullname, shortname, sortorder, 1 as access FROM {course} as c 
-			JOIN {crowd_course} as cc ON c.id = cc.courseid 
-			JOIN {crowd_members} AS cm ON cm.crowdid = cc.crowdid
-			JOIN {crowd} AS cr ON cm.crowdid = cr.id
+			JOIN {ecatalog_crowd_course} as cc ON c.id = cc.courseid 
+			JOIN {ecatalog_crowd_members} AS cm ON cm.crowdid = cc.crowdid
+			JOIN {ecatalog} AS cr ON cm.crowdid = cr.id
 			JOIN {cohort_members} AS chm ON chm.cohortid = cm.cohortid
 			JOIN {user} AS u ON u.id = chm.userid
 			WHERE u.id ={$USER->id}";
 	if ($category_id) $sql.=" and c.category = {$category_id}";
 	$sql.= " AND c.visible=1 ";	
 	$sql2 = "SELECT c.id, c.summary as description, fullname, shortname, sortorder, 0 as access FROM {course} as c 
-			JOIN {crowd_course} as cc ON c.id = cc.courseid 
-			JOIN {crowd} AS cr ON cc.crowdid = cr.id
+			JOIN {ecatalog_crowd_course} as cc ON c.id = cc.courseid 
+			JOIN {ecatalog} AS cr ON cc.crowdid = cr.id
 			WHERE cr.option_val = 1";
 	if ($category_id) $sql2.=" and c.category = {$category_id}";
 	$sql2.= " AND c.visible=1 ";
 	$sql3 = "SELECT c.id, c.summary as description, fullname, shortname, sortorder, 1 as access FROM {course} as c 
-			WHERE c.id NOT IN (SELECT courseid FROM {crowd_course})";
+			WHERE c.id NOT IN (SELECT courseid FROM {ecatalog_crowd_course})";
 	if ($category_id) $sql3.=" and c.category = {$category_id}";
 	$sql3.= " AND c.visible=1 ";
 	
