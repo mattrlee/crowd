@@ -23,8 +23,8 @@
  */
 
 require('../../config.php');
-require($CFG->dirroot.'/local/enlightencatalog//lib.php');
-require($CFG->dirroot.'/local/enlightencatalog//edit_form.php');
+require($CFG->dirroot.'/local/enlightencatalog/lib.php');
+require($CFG->dirroot.'/local/enlightencatalog/edit_form.php');
 
 $id        = optional_param('id', 0, PARAM_INT);
 $contextid = optional_param('contextid', 0, PARAM_INT);
@@ -52,13 +52,13 @@ if ($id) {
 
 require_capability('local/enlightencatalog:manage', $context);
 
-$returnurl = new moodle_url('/local/enlightencatalog//index.php', array('contextid'=>$context->id));
+$returnurl = new moodle_url('/local/enlightencatalog/index.php', array('contextid'=>$context->id));
 
 $PAGE->set_context($context);
-$PAGE->set_url('/local/enlightencatalog//edit.php', array('contextid'=>$context->id, 'id'=>$crowd->id));
+$PAGE->set_url('/local/enlightencatalog/edit.php', array('contextid'=>$context->id, 'id'=>$crowd->id));
 $PAGE->set_context($context);
 
-navigation_node::override_active_url(new moodle_url('/local/enlightencatalog//index.php', array()));
+navigation_node::override_active_url(new moodle_url('/local/enlightencatalog/index.php', array()));
 $PAGE->set_pagelayout('admin');
 
 if ($delete and $crowd->id) {
@@ -73,7 +73,7 @@ if ($delete and $crowd->id) {
 //    $PAGE->set_heading($COURSE->fullname);
     echo $OUTPUT->header();
     echo $OUTPUT->heading($strheading);
-    $yesurl = new moodle_url('/local/enlightencatalog//edit.php', array('id'=>$crowd->id, 'delete'=>1, 'confirm'=>1,'sesskey'=>sesskey()));
+    $yesurl = new moodle_url('/local/enlightencatalog/edit.php', array('id'=>$crowd->id, 'delete'=>1, 'confirm'=>1,'sesskey'=>sesskey()));
     $message = get_string('delconfirm', 'local_enlightencatalog', format_string($crowd->name));
     echo $OUTPUT->confirm($message, $yesurl, $returnurl);
     echo $OUTPUT->footer();
@@ -111,7 +111,7 @@ if ($editform->is_cancelled()) {
     }
 
     // Use new context id, it could have been changed.
-    redirect(new moodle_url('/local/enlightencatalog//index.php', array('contextid'=>$data->contextid)));
+    redirect(new moodle_url('/local/enlightencatalog/index.php', array('contextid'=>$data->contextid)));
 }
 
 echo $OUTPUT->header();

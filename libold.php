@@ -30,12 +30,12 @@ if ($_SERVER['PHP_SELF'] == parse_url($CFG->wwwroot, PHP_URL_PATH).'/index.php')
 
 	$visibility = 1;
 	if ($visibility) {
-		$PAGE->requires->css('/local/enlightencatalog//homepage_overrider.css'); 
-		$PAGE->requires->css('/local/enlightencatalog//tooltipster.css'); 
-		$PAGE->requires->js('/local/enlightencatalog//jquery.min.js', true); 
-		$PAGE->requires->js('/local/enlightencatalog//jquery.tooltipster.min.js', true); 
-		$PAGE->requires->js('/local/enlightencatalog//jquery.colorbox-min.js', true); 
-		$PAGE->requires->js('/local/enlightencatalog//homepage_overrider.js', true); 
+		$PAGE->requires->css('/local/enlightencatalog/homepage_overrider.css'); 
+		$PAGE->requires->css('/local/enlightencatalog/tooltipster.css'); 
+		$PAGE->requires->js('/local/enlightencatalog/jquery.min.js', true); 
+		$PAGE->requires->js('/local/enlightencatalog/jquery.tooltipster.min.js', true); 
+		$PAGE->requires->js('/local/enlightencatalog/jquery.colorbox-min.js', true); 
+		$PAGE->requires->js('/local/enlightencatalog/homepage_overrider.js', true); 
 	}
 }
 

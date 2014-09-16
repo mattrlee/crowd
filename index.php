@@ -23,7 +23,7 @@
  */
 
 require('../../config.php');
-require($CFG->dirroot.'/local/enlightencatalog//lib.php');
+require($CFG->dirroot.'/local/enlightencatalog/lib.php');
 require_once($CFG->libdir.'/adminlib.php');
 
 $contextid = optional_param('contextid', 0, PARAM_INT);
@@ -41,10 +41,10 @@ if (!$manager) {
     require_capability('local/enlightencatalog:view', $context);
 }
 
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.min.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.colorbox-min.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//jquery.cookie.js') );
-$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog//module.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.min.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.colorbox-min.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.cookie.js') );
+$PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/module.js') );
 admin_externalpage_setup('crowd_addedit', '', null, '', array('pagelayout'=>'report'));
 
 echo $OUTPUT->header();
@@ -82,7 +82,7 @@ if ($contextid) {
 if ($search) {
     $params['search'] = $searchquery;
 }
-$baseurl = new moodle_url('/local/enlightencatalog//index.php', $params);
+$baseurl = new moodle_url('/local/enlightencatalog/index.php', $params);
 echo $OUTPUT->paging_bar($crowds['totalcrowds'], $page, 25, $baseurl);
 
 $data = array();
@@ -102,16 +102,16 @@ foreach($crowds['crowds'] as $crowd) {
 
     $buttons = array();
     if ($manager) {
-         $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog//edit.php', array('id'=>$crowd->id, 'delete'=>1)), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('t/delete'), 'alt'=>get_string('delete'), 'class'=>'iconsmall')));
-         $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog//edit.php', array('id'=>$crowd->id)), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('t/edit'), 'alt'=>get_string('edit'), 'class'=>'iconsmall')));
-         $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog//assign.php', array('id'=>$crowd->id)), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('i/users'), 'alt'=>get_string('assign', 'local_enlightencatalog'), 'class'=>'iconsmall')), array('class'=>'assign_cohort_link','pid'=>$crowd->id));
-         $buttons[] = html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog//assign.php', array('id'=>$crowd->id)),'id'=>'assign_cohort_link_val'.$crowd->id, 'type'=>'hidden'));
+         $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog/edit.php', array('id'=>$crowd->id, 'delete'=>1)), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('t/delete'), 'alt'=>get_string('delete'), 'class'=>'iconsmall')));
+         $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog/edit.php', array('id'=>$crowd->id)), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('t/edit'), 'alt'=>get_string('edit'), 'class'=>'iconsmall')));
+         $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog/assign.php', array('id'=>$crowd->id)), html_writer::empty_tag('img', array('src'=>$OUTPUT->pix_url('i/users'), 'alt'=>get_string('assign', 'local_enlightencatalog'), 'class'=>'iconsmall')), array('class'=>'assign_cohort_link','pid'=>$crowd->id));
+         $buttons[] = html_writer::tag('input','',array('value'=>new moodle_url('/local/enlightencatalog/assign.php', array('id'=>$crowd->id)),'id'=>'assign_cohort_link_val'.$crowd->id, 'type'=>'hidden'));
     }
     $line[] = implode(' ', $buttons);
 
     $buttons = array();
     if ($manager) {
-          $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog//assign_control.php', array('id'=>$crowd->id)), html_writer::empty_tag('img', array('src'=>'pix/cr_edit.png', 'alt'=>get_string('assign', 'local_enlightencatalog'), 'class'=>'iconbig')));
+          $buttons[] = html_writer::link(new moodle_url('/local/enlightencatalog/assign_control.php', array('id'=>$crowd->id)), html_writer::empty_tag('img', array('src'=>'pix/cr_edit.png', 'alt'=>get_string('assign', 'local_enlightencatalog'), 'class'=>'iconbig')));
     }
     $line[] = implode(' ', $buttons);
 
@@ -128,7 +128,7 @@ echo html_writer::table($table);
 echo $OUTPUT->paging_bar($crowds['totalcrowds'], $page, 25, $baseurl);
 
 if ($manager) {
-    echo $OUTPUT->single_button(new moodle_url('/local/enlightencatalog//edit.php', array('contextid'=>$context->id)), get_string('add'));
+    echo $OUTPUT->single_button(new moodle_url('/local/enlightencatalog/edit.php', array('contextid'=>$context->id)), get_string('add'));
 }
 
 echo $OUTPUT->footer();
