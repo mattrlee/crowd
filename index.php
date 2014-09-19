@@ -35,10 +35,10 @@ require_login();
 $context = get_context_instance(CONTEXT_SYSTEM);
 
 $manager = true;
-$manager = has_capability('local/enlightencatalog:manage', $context);
+$manager = has_capability('local/crowd:manage', $context);
 
 if (!$manager) {
-    require_capability('local/enlightencatalog:view', $context);
+    require_capability('local/crowd:view', $context);
 }
 
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.min.js') );
@@ -119,7 +119,7 @@ foreach($crowds['crowds'] as $crowd) {
 }
 $table = new html_table();
 $table->head  = array(get_string('name', 'local_enlightencatalog'), get_string('idnumber', 'local_enlightencatalog'), get_string('description', 'local_enlightencatalog'),
-                      get_string('memberscount', 'local_enlightencatalog'), get_string('option_val', 'local_enlightencatalog'), get_string('edit'), get_string('crowd_assignment', 'local_enlightencatalog'));
+                      get_string('memberscount', 'local_enlightencatalog'), get_string('option_val', 'local_enlightencatalog'), get_string('edit'), get_string('crowd_assigment', 'local_enlightencatalog'));
 $table->colclasses = array('leftalign name', 'leftalign id', 'leftalign description', 'leftalign size','centeralign source', 'centeralign action', 'centeralign assign');
 $table->id = 'cohorts';
 $table->attributes['class'] = 'admintable generaltable';

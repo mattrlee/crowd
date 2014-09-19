@@ -33,7 +33,7 @@ require_login();
 $crowd = $DB->get_record('ecatalog', array('id'=>$id), '*', MUST_EXIST);
 $context = get_context_instance(CONTEXT_SYSTEM);
 
-require_capability('local/enlightencatalog:manage', $context);
+require_capability('local/crowd:manage', $context);
 
 $PAGE->set_context($context);
 $PAGE->set_url('/local/enlightencatalog/assign_course.php', array('id'=>$id));

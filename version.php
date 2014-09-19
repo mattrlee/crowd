@@ -15,20 +15,17 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Multiple Enrollments - Allows admin to enrol one or more users into multiple courses at the same time.
- *                        There is a single screen which allows admin to manage course enrolments.
+ * EnlightenCatalog - custom course/category display 
  *
  * @package      local
- * @subpackage   multiple_enrollments
- * @maintainer   Livetek Software Consulting Services
- * @author       Deepali Gujarathi
- * @contact      info@livetek.co.in
+ * @subpackage   enlightencatalog
+ * @maintainer   Envisiontel (www.envisiontel.com)
  * @license      http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2014091500;
+$plugin->version   = 2014091900;
 $plugin->requires  = 2011070100;
 $plugin->cron = 0;
 $plugin->component = 'local_enlightencatalog';

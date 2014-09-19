@@ -1,6 +1,6 @@
 #crowd_container {
  border: 1px solid #eee;
-/* width: 1050px; */
+ width: 100%;
  margin: 0 auto;
  }
 #crowd_container .loading{
@@ -37,7 +37,7 @@
 }
 .crowd_category_image_box {
  border:1px solid #eee;
--moz-border-radius: 10px;
+ moz-border-radius: 10px;
  border-radius: 10px; 
  height:199px;
  width:199px;
@@ -136,7 +136,34 @@
 	position: absolute;
 	display: none;
 }
+.crowd_arrow_up4 {
+	width: 0; 
+	height: 0; 
+	border-left: 20px solid transparent;
+	border-right: 20px solid transparent;
+	
+	border-bottom: 20px solid #eee;
+	position: absolute;
+	display: none;
+}
+.crowd_hidden_box_program{
+	display: none;
+}
 
-.tooltip {
-	position:relative;
+.crowd_program_box {
+ float: left;
+ width:200px;
+ margin:25px;
+ text-align: center;
+ cursor: pointer;
+}
+
+.crowd_program_box span {
+ color: #6699ff;
+ font:bold 15px arial, sans-serif;
+ line-height: 20px;
+}
+
+.tooltip{
+	position: unset;
 }

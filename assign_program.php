@@ -36,7 +36,7 @@ $context = get_context_instance(CONTEXT_SYSTEM);
 require_capability('local/crowd:manage', $context);
 
 $PAGE->set_context($context);
-$PAGE->set_url('/local/enlightencatalog/assign_category.php', array('id'=>$id));
+$PAGE->set_url('/local/enlightencatalog/assign_program.php', array('id'=>$id));
 
 $returnurl = new moodle_url('/local/enlightencatalog/assign_control.php', array('id'=>$crowd->id));
 
@@ -56,33 +56,33 @@ if (!crowd_is_ajax_request())echo $OUTPUT->header();
 echo $OUTPUT->heading(get_string('assignto', 'local_enlightencatalog', format_string($crowd->name)));
 
 // Get the user_selector we will need.
-$potentialcatselector = new course_cat_potential_selector('addselect', array('crowdid'=>$crowd->id, 'accesscontext'=>$context));
-$existingcatselector = new course_cat_existing_selector('removeselect', array('crowdid'=>$crowd->id, 'accesscontext'=>$context));
+$potentialprogramselector = new crowd_potential_selector('addselect', array('crowdid'=>$crowd->id, 'accesscontext'=>$context));
+$existingprogramselector = new crowd_existing_selector('removeselect', array('crowdid'=>$crowd->id, 'accesscontext'=>$context));
 
 // Process incoming user assignments to the cohort
 
 if (optional_param('add', false, PARAM_BOOL) && confirm_sesskey()) {
-    $catstoassign = $potentialcatselector->get_selected_rows();
-    if (!empty($catstoassign)) {
+    $programstoassign = $potentialprogramselector->get_selected_rows();
+    if (!empty($programstoassign)) {
 
-        foreach ($catstoassign as $cat) {
-            crowd_add_category($crowd->id, $cat->id);
+        foreach ($programstoassign as $prog) {
+            crowd_add_program($crowd->id, $prog->id);
         }
 
-        $potentialcatselector->invalidate_selected_rows();
-        $existingcatselector->invalidate_selected_rows();
+        $potentialprogramselector->invalidate_selected_rows();
+        $existingprogramselector->invalidate_selected_rows();
     }
 }
 
 // Process removing user assignments to the cohort
 if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
-    $catstoremove = $existingcatselector->get_selected_rows();
-    if (!empty($catstoremove)) {
-        foreach ($catstoremove as $removecat) {
-            crowd_remove_category($crowd->id, $removecat->id);
+    $programstoremove = $existingprogramselector->get_selected_rows();
+    if (!empty($programstoremove)) {
+        foreach ($programstoremove as $removeprogs) {
+            crowd_remove_program($crowd->id, $removeprogs->id);
         }
-        $potentialcatselector->invalidate_selected_rows();
-        $existingcatselector->invalidate_selected_rows();
+        $potentialprogramselector->invalidate_selected_rows();
+        $existingprogramselector->invalidate_selected_rows();
     }
 }
 
@@ -90,11 +90,12 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
 ?>
 <form id="assignform" method="post" action="<?php echo $PAGE->url ?>"><div>
   <input type="hidden" name="sesskey" value="<?php echo sesskey() ?>" />
+
   <table summary="" class="generaltable generalbox boxaligncenter" cellspacing="0">
     <tr>
       <td id="existingcell">
-          <p><label for="removeselect"><?php print_string('currentcats', 'local_enlightencatalog'); ?></label></p>
-          <?php  $existingcatselector->display() ?>
+          <p><label for="removeselect"><?php print_string('currentprograms', 'local_enlightencatalog'); ?></label></p>
+          <?php  $existingprogramselector->display() ?>
       </td>
       <td id="buttonscell">
           <div id="addcontrols">
@@ -106,8 +107,8 @@ if (optional_param('remove', false, PARAM_BOOL) && confirm_sesskey()) {
           </div>
       </td>
       <td id="potentialcell">
-          <p><label for="addselect"><?php print_string('potcats', 'local_enlightencatalog'); ?></label></p>
-          <?php $potentialcatselector->display() ?>
+          <p><label for="addselect"><?php print_string('potprograms', 'local_enlightencatalog'); ?></label></p>
+          <?php $potentialprogramselector->display() ?>
       </td>
     </tr>
     <tr><td colspan="3" id='backcell'>

@@ -109,7 +109,7 @@ abstract class crowd_selector_base {
         if (isset($options['extrafields'])) {
             $this->extrafields = $options['extrafields'];
         } else if (!empty($CFG->showcohortidentity) &&
-                has_capability('local/enlightencatalog:manage', $this->accesscontext)) {
+                has_capability('local/crowd:manage', $this->accesscontext)) {
             $this->extrafields = explode(',', $CFG->showcohortidentity);
         } else {
             $this->extrafields = array();
@@ -810,4 +810,65 @@ class course_cat_existing_selector extends groups_crowd_selector_base {
         
         return $result;
     }
+}
+
+class crowd_potential_selector extends groups_crowd_selector_base {
+	public function find_rows($search) {
+		global $DB;
+
+		$searchcondition = '';
+		if (!empty($search)) $searchcondition = " AND fullname LIKE '%$search%'";
+
+		// Build the SQL
+		$fields = "SELECT id, fullname ";
+		$sql = " FROM {prog} as c WHERE id NOT in (SELECT programid from {ecatalog_crowd_program} WHERE crowdid = {$this->crowdid}) $searchcondition";
+
+		$orderby = ' ORDER BY fullname';
+
+		if (!$this->is_validating()) {
+			$potentialmemberscount = $DB->count_records_sql("SELECT COUNT(DISTINCT id) $sql");
+			if ($potentialmemberscount > $this->maxrowsperpage) {
+				return $this->too_many_results($search, $potentialmemberscount);
+			}
+		}
+
+		$rs = $DB->get_recordset_sql("$fields $sql $orderby");
+
+		$result = $this->convert_array_format($rs, $search);
+
+		$rs->close();
+
+		return $result;
+	}
+}
+
+
+class crowd_existing_selector extends groups_crowd_selector_base {
+	public function find_rows($search) {
+		global $DB;
+
+		$searchcondition = '';
+		if (!empty($search)) $searchcondition = " AND fullname LIKE '%$search%'";
+
+		// Build the SQL
+		$fields = "SELECT id, fullname ";
+		$sql = " FROM {prog} as c WHERE id in (SELECT programid from {ecatalog_crowd_program} WHERE crowdid = {$this->crowdid}) $searchcondition";
+
+		$orderby = ' ORDER BY fullname';
+
+		if (!$this->is_validating()) {
+			$potentialmemberscount = $DB->count_records_sql("SELECT COUNT(DISTINCT id) $sql");
+			if ($potentialmemberscount > $this->maxrowsperpage) {
+				return $this->too_many_results($search, $potentialmemberscount);
+			}
+		}
+
+		$rs = $DB->get_recordset_sql("$fields $sql $orderby");
+
+		$result = $this->convert_array_format($rs, $search);
+
+		$rs->close();
+
+		return $result;
+	}
 }

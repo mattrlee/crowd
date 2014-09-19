@@ -33,6 +33,7 @@ class admin_setting_cccourselist_frontpage extends admin_setting {
         $this->choices = array(
             'courses'    => get_string('frontpagecourselist'),
             'categories' => get_string('frontpagecategorynames'),
+        	'programs' => get_string('listofprograms','local_enlightencatalog'),
             'none'                 => get_string('none'));
         return true;
     }

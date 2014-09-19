@@ -1,13 +1,13 @@
 <?php
 $capabilities = array(
-   'local/enlightencatalog:manage' => array(
+   'local/ecatalog:manage' => array(
         'captype' => 'write',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => array(
             'manager' => CAP_ALLOW
         )
     ),
-    'local/enlightencatalog:view' => array(
+    'local/ecatalog:view' => array(
         'captype' => 'read',
         'contextlevel' => CONTEXT_MODULE,
         'archetypes' => array(
