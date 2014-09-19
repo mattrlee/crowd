@@ -14,7 +14,7 @@ $settings->add(new admin_setting_cccourselist_frontpage());
 
 if ($hassiteconfig) { // needs this condition or there is error on login page
 
-	$settings = new admin_settingpage('local_enlightencatalog', 'Crowd Control');
+	$settings = new admin_settingpage('local_enlightencatalog', 'Settings');
 	$ADMIN->add('crowd_menuitem', $settings);
 
 	
