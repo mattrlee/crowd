@@ -21,7 +21,7 @@
 }
 .crowd_category_box {
  float: left;
- width:200px;
+ width:101px;
  margin:25px;
  text-align: center;
  cursor: pointer;
@@ -33,14 +33,14 @@
 }
 .crowd_empty_box {
  height: 10px;
- width: 199px
+ width: 100px
 }
 .crowd_category_image_box {
  border:1px solid #eee;
  moz-border-radius: 10px;
  border-radius: 10px; 
- height:199px;
- width:199px;
+ height:100px;
+ width:100px;
  margin:0;
  background-color: white;
  display: table-cell; 
@@ -165,5 +165,5 @@
 }
 
 .tooltip{
-	position: unset;
+	position: static;
 }
