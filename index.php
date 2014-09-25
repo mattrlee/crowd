@@ -35,10 +35,10 @@ require_login();
 $context = get_context_instance(CONTEXT_SYSTEM);
 
 $manager = true;
-$manager = has_capability('local/crowd:manage', $context);
+$manager = has_capability('local/ecatalog:manage', $context);
 
 if (!$manager) {
-    require_capability('local/crowd:view', $context);
+    require_capability('local/ecatalog:view', $context);
 }
 
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.min.js') );

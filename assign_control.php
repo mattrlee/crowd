@@ -32,7 +32,7 @@ require_login();
 
 $crowd = $DB->get_record('ecatalog', array('id'=>$id), '*', MUST_EXIST);
 $context = get_context_instance(CONTEXT_SYSTEM);
-require_capability('local/crowd:manage', $context);
+require_capability('local/ecatalog:manage', $context);
 
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.min.js') );
 $PAGE->requires->js( new moodle_url($CFG->wwwroot . '/local/enlightencatalog/jquery.colorbox-min.js') );

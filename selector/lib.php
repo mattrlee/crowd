@@ -109,7 +109,7 @@ abstract class crowd_selector_base {
         if (isset($options['extrafields'])) {
             $this->extrafields = $options['extrafields'];
         } else if (!empty($CFG->showcohortidentity) &&
-                has_capability('local/crowd:manage', $this->accesscontext)) {
+                has_capability('local/ecatalog:manage', $this->accesscontext)) {
             $this->extrafields = explode(',', $CFG->showcohortidentity);
         } else {
             $this->extrafields = array();

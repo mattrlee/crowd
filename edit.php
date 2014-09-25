@@ -50,7 +50,7 @@ if ($id) {
     $crowd->description = '';
 }
 
-require_capability('local/crowd:manage', $context);
+require_capability('local/ecatalog:manage', $context);
 
 $returnurl = new moodle_url('/local/enlightencatalog/index.php', array('contextid'=>$context->id));
 
