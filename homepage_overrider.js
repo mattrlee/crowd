@@ -1,9 +1,9 @@
 window.onload = function() {
 	$(document).ready(function(){
-		$('#region-main').append('<div id="crowd_container"> <div class="loading"> <img src="local/crowd/pix/loading.gif" /> </div> </div>')
+		$('#region-main').append('<div id="crowd_container"> <div class="loading"> <img src="local/ecatalog/pix/loading.gif" /> </div> </div>')
 		$.ajax({
 			type: "POST",
-			url: 'local/crowd/homepage.php',
+			url: 'local/ecatalog/homepage.php',
 			success: function(data) {
 				$('#crowd_container').html(data);
 				$('.tooltip').tooltipster({interactive: true, functionReady:crowd_init_links});
