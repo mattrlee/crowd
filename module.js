@@ -21,9 +21,7 @@ $(document).ready(function(){
 function pagerefresh() {
 	    var value = document.getElementById("selectType").value;
 	    var id = document.getElementById("id").value;
-	    window.location.assign("http://murray.enlightenlms.com/local/enlightencatalog/assign_control.php?id="+id+"&choiceId="+value);
-//	    window.location.append("http://murray.enlightenlms.com/local/enlightencatalog/assign_control.php?id=4&choiceId="+value);
-//	display(document.getElementById("selectType").value);
+	    window.location.assign("./assign_control.php?id="+id+"&choiceId="+value);
 }
 
 
